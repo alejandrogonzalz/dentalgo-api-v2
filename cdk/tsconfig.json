@@ -3,7 +3,6 @@
 		"target": "ES2020",
 		"module": "commonjs",
 		"lib": ["es2020", "dom"],
-		"declaration": true,
 		"strict": true,
 		"noImplicitAny": true,
 		"strictNullChecks": true,
@@ -17,16 +16,15 @@
 		"inlineSources": true,
 		"experimentalDecorators": true,
 		"strictPropertyInitialization": false,
-		"typeRoots": [
-			"./node_modules/@types"
-		],
+		"typeRoots": ["../node_modules/@types"],
 		"allowSyntheticDefaultImports": true,
+		"types": ["jest", "node"],
 		"paths": {
 			"@api/*": ["../api/*"],
 			"cdk/*": ["../cdk/*"]
-		}
+		},
+		"noEmit": true
 	},
-	"exclude": [
-		"node_modules", "cdk.out", "cdk/cdk.out"
-	]
+	"exclude": ["../node_modules", "cdk.out", "cdk/cdk.out"],
+	"include": ["test/*.ts"]
 }

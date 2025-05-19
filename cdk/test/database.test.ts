@@ -1,7 +1,10 @@
 import * as cdk from 'aws-cdk-lib';
-import { Template } from 'aws-cdk-lib/assertions';
+import {Match, Template} from 'aws-cdk-lib/assertions';
 import { DatabaseStack } from 'cdk/lib/database-stack';
 import { ConfigProps } from 'cdk/lib/config';
+import 'jest';
+import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
+import { LambdaStack } from "cdk/lib/lambda-stack";
 
 describe('DatabaseStack', () => {
 	let template: Template;
@@ -172,4 +175,7 @@ describe('DatabaseStack', () => {
 			});
 		});
 	});
+
 });
+
+
