@@ -20,11 +20,11 @@
 		"typeRoots": [
 			"./node_modules/@types"
 		],
+		"allowSyntheticDefaultImports": true,
 		"paths": {
-			"api/*": ["./api/*"],
-			"cdk/*": ["./cdk/*"]
-		},
-		"allowSyntheticDefaultImports": true
+			"@api/*": ["../api/*"],
+			"cdk/*": ["../cdk/*"]
+		}
 	},
 	"exclude": [
 		"node_modules", "cdk.out", "cdk/cdk.out"
