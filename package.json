@@ -1,0 +1,46 @@
+{
+	"name": "dental-go-api",
+	"version": "0.1.0",
+	"bin": {
+		"aws-cdk": "bin/aws-cdk.js"
+	},
+	"scripts": {
+		"cdk:build": "cd cdk && tsc",
+		"cdk:watch": "cd cdk && tsc -w",
+		"cdk:test": "cd cdk && jest",
+		"cdk:deploy": "cd cdk && cdk deploy",
+		"cdk:diff": "cd cdk && cdk diff",
+		"cdk:synth": "cd cdk && cdk synth",
+		"api:build": "cd api && tsc",
+		"api:watch": "cd api && tsc -w",
+		"api:test": "cd api && jest",
+		"api:dev": "cd api && pnpm run dev",
+		"build": "pnpm run cdk:build && pnpm run api:build",
+		"test": "pnpm run cdk:test && pnpm run api:test",
+		"deploy": "pnpm run cdk:deploy",
+		"lint": "biome check ./cdk ./api",
+		"format": "biome format --write ./cdk ./api",
+		"cdk": "cd cdk && cdk"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@commitlint/cli": "19.5.0",
+		"@commitlint/config-conventional": "19.5.0",
+		"@types/jest": "29.5.14",
+		"@types/aws-lambda": "8.10.149",
+		"@types/aws-lambda-fastify": "1.4.5",
+		"@types/node": "22.7.9",
+		"aws-cdk": "2.1000.2",
+		"jest": "29.7.0",
+		"ts-jest": "29.2.5",
+		"ts-node": "10.9.2",
+		"typescript": "5.6.3"
+	},
+	"dependencies": {
+		"aws-cdk-lib": "2.179.0",
+		"aws-lambda-fastify": "2.2.0",
+		"constructs": "10.0.0",
+		"dotenv": "16.4.7",
+		"fastify": "5.3.3"
+	}
+}
