@@ -11,11 +11,6 @@ A scalable, serverless backend for managing appointments, services, and users, b
 * Environment-Aware: Configures dev/prod settings (e.g., TTL, memory size).
 
 2. **API Layer (Fastify Lambdas)**
-* Backend Stack: Defines DynamoDB tables with encryption, backups, and fine-grained access controls.
-* API Stack: Deploys API Gateway with Lambda integrations (one per service).
-* Environment-Aware: Configures dev/prod settings (e.g., TTL, memory size).
-
-3. **API Layer (Fastify Lambdas)**
 * Per-Service Isolation:
   * users/: CRUD operations with JWT auth (planned)
 * appointments/: Time-based queries with DynamoDB GSIs
@@ -24,11 +19,11 @@ A scalable, serverless backend for managing appointments, services, and users, b
   * Cold-start mitigation via aws-lambda-fastify
   *Shared DynamoDB client for connection pooling
 
-4. ** CI/CD (GitHub Actions)**
-   * Unified Testing: Runs CDK assertions + API integration tests in parallel.
-   * Safe Deployments:
-     * Infra deploys first → API deploys after (with dependency checks).
-     * Rollback workflows on failure.
+3. **CI/CD (GitHub Actions)**
+* Unified Testing: Runs CDK assertions + API integration tests in parallel.
+* Safe Deployments:
+  * Infra deploys first → API deploys after (with dependency checks).
+  * Rollback workflows on failure.
 
 ----
 ## **Prerequisites**
