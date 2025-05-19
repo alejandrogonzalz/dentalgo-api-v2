@@ -1,19 +1,23 @@
 {
 	"compilerOptions": {
 		"target": "ES2020",
-		"module": "commonjs",
-		"outDir": "./api.out",
+		"module": "NodeNext",  // Changed from "commonjs"
+		"moduleResolution": "NodeNext",  // Changed from "Node16"
+		"outDir": "./dist",
 		"rootDir": "./src",
 		"lib": ["es2020"],
 		"types": ["node"],
-		"baseUrl": ".", // Required for paths to work
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"skipLibCheck": true,  // Still needed for Zod
+		"baseUrl": ".",
 		"paths": {
-			"@api/*": ["../api/*"],
+			"@api/*": ["./api/*"],
 			"@src/*": ["./src/*"],
-			"@cdk/*": ["../cdk/*"]
+			"@cdk/*": ["./cdk/*"]
 		}
 	},
-	"exclude": [
-		"../node_modules", "cdk.out", "cdk/cdk.out"
-	]
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "**/*.test.ts", "cdk.out"]
 }

@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { CatalogController } from './controller/catalog.controller';
+import { CatalogController } from './controller';
 import {
 	catalogInputSchema,
 	catalogParamsSchema,
