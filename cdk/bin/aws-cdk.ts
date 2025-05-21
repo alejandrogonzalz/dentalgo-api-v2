@@ -17,5 +17,9 @@ const databaseStack = new DatabaseStack(app, "DatabaseStack", {
 });
 
 new LambdaStack(app, 'LambdaStack', {
+	env: {
+		region: config.REGION,
+		account: config.ACCOUNT_ID,
+	},
 	catalogTable: databaseStack.catalogTable,
 });

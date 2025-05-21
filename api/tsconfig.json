@@ -1,12 +1,13 @@
 {
 	"compilerOptions": {
 		"target": "ES2020",
-		"module": "NodeNext",  // Changed from "commonjs"
-		"moduleResolution": "NodeNext",  // Changed from "Node16"
+		"module": "CommonJS",  // Changed back from NodeNext
+		"moduleResolution": "node",  // More reliable than NodeNext for CJS
 		"outDir": "./dist",
 		"rootDir": "./src",
 		"lib": ["es2020"],
 		"types": ["node"],
+		"typeRoots": ["../node_modules/@types"],
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"strict": true,

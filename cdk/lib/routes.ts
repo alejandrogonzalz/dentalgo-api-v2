@@ -1,3 +1,3 @@
 export const routes = {
-	CATALOG_LAMBDA: "../api/dist/catalog",
+	CATALOG_LAMBDA: "../api/src/catalog/handler.ts",
 } as const;

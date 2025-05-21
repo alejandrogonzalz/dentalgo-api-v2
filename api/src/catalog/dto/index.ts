@@ -8,8 +8,7 @@ export const catalogInputSchema = z.object({
 });
 
 export const catalogParamsSchema = z.object({
-	id: z.string().regex(/^\d+$/, 'ID must be numeric')
-		.transform(Number)
+	id: z.string()
 });
 
 export type CatalogInput = z.infer<typeof catalogInputSchema>;

@@ -5,7 +5,7 @@ import {
 	catalogParamsSchema,
 	type CatalogInput,
 	type CatalogParams
-} from './dto/index';
+} from './dto';
 
 export function registerCatalogRoutes(
 	fastify: FastifyInstance,
@@ -29,39 +29,39 @@ export function registerCatalogRoutes(
 	);
 
 	// Get Catalog by ID
-	// fastify.get<{ Params: CatalogParams }>(
-	// 	'/catalogs/:id',
-	// 	{
-	// 		schema: {
-	// 			params: catalogParamsSchema
-	// 		}
-	// 	},
-	// 	(req, reply) => controller.getCatalog(req, reply)
-	// );
+	fastify.get<{ Params: CatalogParams }>(
+		'/catalogs/:id',
+		{
+			schema: {
+				params: catalogParamsSchema
+			}
+		},
+		(req, reply) => controller.getCatalog(req, reply)
+	);
 
-	// // Update Catalog
-	// fastify.put<{
-	// 	Params: CatalogParams;
-	// 	Body: Partial<CatalogInput>
-	// }>(
-	// 	'/catalogs/:id',
-	// 	{
-	// 		schema: {
-	// 			params: catalogParamsSchema,
-	// 			body: catalogInputSchema.partial()
-	// 		}
-	// 	},
-	// 	(req, reply) => controller.updateCatalog(req, reply)
-	// );
-	//
+	// Update Catalog
+	fastify.put<{
+		Params: CatalogParams;
+		Body: Partial<CatalogInput>
+	}>(
+		'/catalogs/:id',
+		{
+			schema: {
+				params: catalogParamsSchema,
+				body: catalogInputSchema.partial()
+			}
+		},
+		(req, reply) => controller.updateCatalog(req, reply)
+	);
+
 	// // Delete Catalog
-	// fastify.delete<{ Params: CatalogParams }>(
-	// 	'/catalogs/:id',
-	// 	{
-	// 		schema: {
-	// 			params: catalogParamsSchema
-	// 		}
-	// 	},
-	// 	(req, reply) => controller.deleteCatalog(req, reply)
-	// );
+	fastify.delete<{ Params: CatalogParams }>(
+		'/catalogs/:id',
+		{
+			schema: {
+				params: catalogParamsSchema
+			}
+		},
+		(req, reply) => controller.deleteCatalog(req, reply)
+	);
 }

@@ -19,72 +19,73 @@ export class DatabaseStack extends Stack {
 
 		const { config } = props;
 
-		// Users Table
+		// Users Table - Reduced capacity to stay within Free Tier
 		this.usersTable = new dynamodb.Table(this, 'UsersTable', {
+			tableName: 'UsersTable',
 			partitionKey: { name: 'id', type: dynamodb.AttributeType.NUMBER },
-			billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-			pointInTimeRecoverySpecification: {
-				pointInTimeRecoveryEnabled: true,
-				recoveryPeriodInDays: 35,
-			},
+			billingMode: dynamodb.BillingMode.PROVISIONED,
+			readCapacity: 5,  // Reduced from 20 to 5
+			writeCapacity: 5, // Reduced from 20 to 5
 			removalPolicy: config.ENVIRONMENT === 'prod'
 				? RemovalPolicy.RETAIN
 				: RemovalPolicy.DESTROY,
 		});
 
-		// Add email as a Global Secondary Index for user lookup
+		// GSI with reduced capacity
 		this.usersTable.addGlobalSecondaryIndex({
 			indexName: 'byEmail',
 			partitionKey: { name: 'email', type: dynamodb.AttributeType.STRING },
 			projectionType: dynamodb.ProjectionType.ALL,
+			readCapacity: 5,  // Reduced from 20 to 5
+			writeCapacity: 5  // Reduced from 20 to 5
 		});
 
-		// Appointments Table
+		// Appointments Table - Reduced capacity
 		this.appointmentsTable = new dynamodb.Table(this, 'AppointmentsTable', {
+			tableName: 'AppointmentsTable',
 			partitionKey: { name: 'id', type: dynamodb.AttributeType.NUMBER },
 			sortKey: { name: 'startTime', type: dynamodb.AttributeType.STRING },
-			billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-			pointInTimeRecoverySpecification: {
-				pointInTimeRecoveryEnabled: true,
-				recoveryPeriodInDays: 35,
-			},
+			billingMode: dynamodb.BillingMode.PROVISIONED,
+			readCapacity: 5,  // Reduced from 20 to 5
+			writeCapacity: 5, // Reduced from 20 to 5
 			removalPolicy: config.ENVIRONMENT === 'prod'
 				? RemovalPolicy.RETAIN
 				: RemovalPolicy.DESTROY,
 			timeToLiveAttribute: 'ttl',
 		});
 
-		// Index for appointments by calendar
+		// GSI with reduced capacity
 		this.appointmentsTable.addGlobalSecondaryIndex({
 			indexName: 'byCalendar',
 			partitionKey: { name: 'calendarId', type: dynamodb.AttributeType.STRING },
 			sortKey: { name: 'startTime', type: dynamodb.AttributeType.STRING },
 			projectionType: dynamodb.ProjectionType.ALL,
+			readCapacity: 5,  // Explicitly set to 5
+			writeCapacity: 5  // Explicitly set to 5
 		});
 
-		// CatalogTable Table
+		// CatalogTable - Reduced capacity
 		this.catalogTable = new dynamodb.Table(this, 'CatalogTable', {
+			tableName: 'CatalogTable',
 			partitionKey: { name: 'id', type: dynamodb.AttributeType.NUMBER },
-			billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-			encryption: dynamodb.TableEncryption.AWS_MANAGED,
-			pointInTimeRecoverySpecification: {
-				pointInTimeRecoveryEnabled: true,
-				recoveryPeriodInDays: 35,
-			},
-			removalPolicy: RemovalPolicy.RETAIN,
+			billingMode: dynamodb.BillingMode.PROVISIONED,
+			readCapacity: 5,  // Reduced from 20 to 5
+			writeCapacity: 5, // Reduced from 20 to 5
+			removalPolicy: config.ENVIRONMENT === 'prod'
+				? RemovalPolicy.RETAIN
+				: RemovalPolicy.DESTROY,
 		});
 
-		// Audit Table
+		// Audit Table - Reduced capacity
 		this.auditTable = new dynamodb.Table(this, 'AuditTable', {
 			partitionKey: { name: 'entityType', type: dynamodb.AttributeType.STRING },
 			sortKey: { name: 'timestamp', type: dynamodb.AttributeType.NUMBER },
-			billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-			encryption: dynamodb.TableEncryption.AWS_MANAGED,
-			pointInTimeRecoverySpecification: {
-				pointInTimeRecoveryEnabled: true,
-				recoveryPeriodInDays: 35,
-			},
-			removalPolicy: RemovalPolicy.RETAIN,
+			billingMode: dynamodb.BillingMode.PROVISIONED,
+			readCapacity: 5,  // Reduced from 20 to 5
+			writeCapacity: 5, // Reduced from 20 to 5
+			removalPolicy: config.ENVIRONMENT === 'prod'
+				? RemovalPolicy.RETAIN
+				: RemovalPolicy.DESTROY,
 			timeToLiveAttribute: 'expireAt',
 		});
 
